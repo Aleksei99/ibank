@@ -1,3 +1,5 @@
+package by.ibank.entity;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +86,7 @@ public class User extends Man {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "by.ibank.entity.User{" +
                 "cards=" + cards +
                 ", account=" + account +
                 ", spending=" + spending +

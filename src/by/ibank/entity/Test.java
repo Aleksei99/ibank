@@ -1,3 +1,5 @@
+package by.ibank.entity;
+
 public class Test {
     public static void checkFunctional(String userRole) {
         if (userRole.equals(UserRole.ADMIN.name())) {

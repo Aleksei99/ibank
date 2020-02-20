@@ -1,3 +1,5 @@
+package by.ibank.entity;
+
 public enum UserRole {
     USER(1),
     MODERATOR(2),

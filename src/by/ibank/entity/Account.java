@@ -1,3 +1,5 @@
+package by.ibank.entity;
+
 import java.util.Objects;
 
 public class Account {
@@ -44,7 +46,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
+        return "by.ibank.entity.Account{" +
                 "account_number='" + accountNumber + '\'' +
                 ", amount=" + amount +
                 '}';

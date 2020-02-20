@@ -1,3 +1,5 @@
+package by.ibank.entity;
+
 import java.sql.Date;
 
 abstract class  Man {
@@ -93,7 +95,7 @@ abstract class  Man {
 
     @Override
     public String toString() {
-        return "Man{" +
+        return "by.ibank.entity.Man{" +
                 "name='" + name + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", surname='" + surname + '\'' +

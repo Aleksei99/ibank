@@ -1,3 +1,5 @@
+package by.ibank.entity;
+
 import java.time.LocalDate;
 
 public class History {
@@ -30,7 +32,7 @@ public class History {
 
     @Override
     public String toString() {
-        return "History{" +
+        return "by.ibank.entity.History{" +
                 "spent_money=" + spentMoney +
                 ", date_purchase=" + datePurchase +
                 '}';

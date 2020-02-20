@@ -1,3 +1,5 @@
+package by.ibank.entity;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -45,7 +47,7 @@ public class CreditCard {
 
     @Override
     public String toString() {
-        return "CreditCard{" +
+        return "by.ibank.entity.CreditCard{" +
                 "card_number=" + cardNumber +
                 ", dateExpire=" + dateExpire +
                 '}';
