@@ -2,23 +2,23 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class CreditCard {
-    private int card_number;
+    private int cardNumber;
     private LocalDate dateExpire; //???????????????
 
-    public CreditCard(int card_number, LocalDate dateExpire) {
-        this.card_number = card_number;
+    public CreditCard(int cardNumber, LocalDate dateExpire) {
+        this.cardNumber = cardNumber;
         this.dateExpire = dateExpire;
     }
 
     public CreditCard() {
     }
 
-    public int getCard_number() {
-        return card_number;
+    public int getCardNumber() {
+        return cardNumber;
     }
 
-    public void setCard_number(int card_number) {
-        this.card_number = card_number;
+    public void setCardNumber(int cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public LocalDate getDateExpire() {
@@ -34,19 +34,19 @@ public class CreditCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreditCard that = (CreditCard) o;
-        return card_number == that.card_number &&
+        return cardNumber == that.cardNumber &&
                 Objects.equals(dateExpire, that.dateExpire);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(card_number, dateExpire);
+        return Objects.hash(cardNumber, dateExpire);
     }
 
     @Override
     public String toString() {
         return "CreditCard{" +
-                "card_number=" + card_number +
+                "card_number=" + cardNumber +
                 ", dateExpire=" + dateExpire +
                 '}';
     }

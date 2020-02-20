@@ -1,39 +1,38 @@
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class History {
-    private int spent_money;
-    private LocalDate date_purchase;
+    private int spentMoney;
+    private LocalDate datePurchase;
 
-    public History(int spent_money, LocalDate date_purchase) {
-        this.spent_money = spent_money;
-        this.date_purchase = date_purchase;
+    public History(int spentMoney, LocalDate datePurchase) {
+        this.spentMoney = spentMoney;
+        this.datePurchase = datePurchase;
     }
 
     public History() {
     }
 
-    public int getSpent_money() {
-        return spent_money;
+    public int getSpentMoney() {
+        return spentMoney;
     }
 
-    public void setSpent_money(int spent_money) {
-        this.spent_money = spent_money;
+    public void setSpentMoney(int spentMoney) {
+        this.spentMoney = spentMoney;
     }
 
-    public LocalDate getDate_purchase() {
-        return date_purchase;
+    public LocalDate getDatePurchase() {
+        return datePurchase;
     }
 
-    public void setDate_purchase(LocalDate date_purchase) {
-        this.date_purchase = date_purchase;
+    public void setDatePurchase(LocalDate datePurchase) {
+        this.datePurchase = datePurchase;
     }
 
     @Override
     public String toString() {
         return "History{" +
-                "spent_money=" + spent_money +
-                ", date_purchase=" + date_purchase +
+                "spent_money=" + spentMoney +
+                ", date_purchase=" + datePurchase +
                 '}';
     }
 }
