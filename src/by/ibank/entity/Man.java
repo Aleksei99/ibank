@@ -10,11 +10,11 @@ abstract class  Man {
     private String address;
     private int telephone;
     private String sex;
-    private String nPassport;
+    private String passportNumber;
 
 
     public Man(String name, String secondName, String surname, Date birthday,
-               String address, int telephone, String sex, String nPassport) {
+               String address, int telephone, String sex, String passportNumber) {
         this.name = name;
         this.secondName = secondName;
         this.surname = surname;
@@ -22,7 +22,7 @@ abstract class  Man {
         this.address = address;
         this.telephone = telephone;
         this.sex = sex;
-        this.nPassport = nPassport;
+        this.passportNumber = passportNumber;
 
     }
 
@@ -57,8 +57,8 @@ abstract class  Man {
         this.sex = sex;
     }
 
-    public void setnPassport(String nPassport) {
-        this.nPassport = nPassport;
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     public String getName() {
@@ -89,8 +89,8 @@ abstract class  Man {
         return sex;
     }
 
-    public String getnPassport() {
-        return nPassport;
+    public String getPassportNumber() {
+        return passportNumber;
     }
 
     @Override
@@ -103,7 +103,7 @@ abstract class  Man {
                 ", address='" + address + '\'' +
                 ", telephone=" + telephone +
                 ", sex='" + sex + '\'' +
-                ", nPassport='" + nPassport + '\'' +
+                ", nPassport='" + passportNumber + '\'' +
                 '}';
     }
 }

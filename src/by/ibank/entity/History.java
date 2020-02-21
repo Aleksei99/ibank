@@ -2,11 +2,17 @@ package by.ibank.entity;
 
 import java.time.LocalDate;
 
-public class History {
+public class History extends AbstractEntity {
     private int spentMoney;
     private LocalDate datePurchase;
 
     public History(int spentMoney, LocalDate datePurchase) {
+        this.spentMoney = spentMoney;
+        this.datePurchase = datePurchase;
+    }
+
+    public History(int id, int spentMoney, LocalDate datePurchase) {
+        super(id);
         this.spentMoney = spentMoney;
         this.datePurchase = datePurchase;
     }

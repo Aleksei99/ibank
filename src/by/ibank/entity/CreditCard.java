@@ -3,11 +3,17 @@ package by.ibank.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class CreditCard {
+public class CreditCard extends AbstractEntity{
     private int cardNumber;
     private LocalDate dateExpire; //???????????????
 
     public CreditCard(int cardNumber, LocalDate dateExpire) {
+        this.cardNumber = cardNumber;
+        this.dateExpire = dateExpire;
+    }
+
+    public CreditCard(int id, int cardNumber, LocalDate dateExpire) {
+        super(id);
         this.cardNumber = cardNumber;
         this.dateExpire = dateExpire;
     }

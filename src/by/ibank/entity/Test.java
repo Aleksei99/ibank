@@ -18,6 +18,7 @@ public class Test {
         checkFunctional("ADMIN");
         checkFunctional("MODERATOR");
         System.out.println(UserRole.ADMIN.getValue());
+
     }
 
 
