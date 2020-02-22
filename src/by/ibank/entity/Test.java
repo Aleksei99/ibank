@@ -1,5 +1,7 @@
 package by.ibank.entity;
 
+import by.ibank.dao.AccountDAO;
+import by.ibank.dao.AccountDAOImpl;
 import by.ibank.dao.UserDAO;
 import by.ibank.dao.UserDAOImpl;
 
@@ -22,8 +24,15 @@ public class Test {
         checkFunctional("MODERATOR");
         System.out.println(UserRole.ADMIN.getValue());
         UserDAO userDAO = new UserDAOImpl();
-        User user1 = new User("Alex","Alexandrovich","Smuraha",1999,12,2,"home","+375298592223","mail","mc2245492","sm@gamil.com","dsgff584","smura",UserRole.ADMIN);
-        userDAO.save(user1);
+//        User user2 = new User("Aloxa","Alexandrovich","kekw",1992,11,2,"home","+375298582223","mail","mc2845492","al@gamil.com","dsgff584","alox",UserRole.USER);
+//        userDAO.save(user2);
+       // User user = userDAO.findUser(2);
+        AccountDAO accountDAO = new AccountDAOImpl();
+      //  Account ac1 =new Account("3wjr4h87ff",200);//3wjr4h2j23428
+       // accountDAO.save(user,ac1);
+        Account fromAccount = accountDAO.findAccount("3wjr4h2j23428");
+        Account toAccount = accountDAO.findAccount("3wjr4h87ff");
+        accountDAO.transferMoney(fromAccount,50,toAccount);
     }
 
 
