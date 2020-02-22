@@ -8,21 +8,22 @@ abstract class  Man {
     private String surname;
     private Date birthday; // ?????????????
     private String address;
-    private int telephone;
+    private String telephone;
     private String sex;
     private String passportNumber;
+    private String email;
 
-
-    public Man(String name, String secondName, String surname, Date birthday,
-               String address, int telephone, String sex, String passportNumber) {
+    public Man(String name, String secondName, String surname, int year, int month, int day,
+               String address, String telephone, String sex, String passportNumber, String email) {
         this.name = name;
         this.secondName = secondName;
         this.surname = surname;
-        this.birthday = birthday;
+        this.birthday =new Date(year, month, day);
         this.address = address;
         this.telephone = telephone;
         this.sex = sex;
         this.passportNumber = passportNumber;
+        this.email=email;
 
     }
 
@@ -49,7 +50,7 @@ abstract class  Man {
         this.address = address;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
@@ -59,6 +60,14 @@ abstract class  Man {
 
     public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -81,7 +90,7 @@ abstract class  Man {
         return address;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 

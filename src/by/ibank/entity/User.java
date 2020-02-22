@@ -17,18 +17,21 @@ public class User extends Man {
     private String login;
 
     public User(int id, String name, String secondName, String surname,
-                Date birthday, String address, int telephone, String sex,
-                String nPassport, String password, String login) {
-        super(name, secondName, surname, birthday, address, telephone, sex, nPassport);
+                int year,int month, int day, String address, String telephone, String sex,
+                String nPassport,String email, String password, String login) {
+        super(name, secondName, surname, year,month,day, address, telephone, sex, nPassport, email);
         this.id=id;
         this.password = password;
         this.login = login;
     }
 
     public User(String name, String secondName, String surname,
-                Date birthday, String address, int telephone, String sex,
-                String nPassport) {
-        super(name, secondName, surname, birthday, address, telephone, sex, nPassport);
+                int year,int month, int day, String address, String telephone, String sex,
+                String nPassport, String email,String password, String login,UserRole userRole) {
+        super(name, secondName, surname, year,month,day, address, telephone, sex, nPassport, email);
+        this.userRole=userRole;
+        this.login=login;
+        this.password=password;
     }
 
     public User() {

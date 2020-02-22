@@ -11,6 +11,7 @@ public enum UserRole {
         name = i;
     }
 
+
     public int getValue() {
         return name;
     }
