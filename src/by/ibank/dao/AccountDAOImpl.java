@@ -4,6 +4,8 @@ import by.ibank.entity.Account;
 import by.ibank.entity.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountDAOImpl implements AccountDAO {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -28,13 +30,48 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void delete(Account account) throws ClassNotFoundException {
-
+    public void delete(String account_number) throws ClassNotFoundException {
+        Class.forName(JDBC_DRIVER);
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM  accounts WHERE (account_number = ?)")) {
+            preparedStatement.setString(1,account_number);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void addMoney(Account account, int money) throws ClassNotFoundException {
+        Class.forName(JDBC_DRIVER);
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE  accounts SET amount = ? WHERE account_number = ?")){
+            preparedStatement.setInt(1,account.getAmount()+money);
+            preparedStatement.setString(2,account.getAccountNumber());
+            preparedStatement.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public List<Account> findAllAccounts() throws ClassNotFoundException {
+        Class.forName(JDBC_DRIVER);
+        List<Account> accounts = new ArrayList<>();
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+            Statement statement = connection.createStatement()){
+            try(ResultSet resultSet = statement.executeQuery("select * from accounts")) {
+                while (resultSet.next()){
+                    Account account = new Account();
+                    account.setAccountNumber(resultSet.getString("account_number"));
+                    account.setAmount(resultSet.getInt("amount"));
+                    accounts.add(account);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return accounts;
     }
 
     @Override
