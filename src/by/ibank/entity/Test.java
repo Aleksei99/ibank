@@ -1,9 +1,6 @@
 package by.ibank.entity;
 
-import by.ibank.dao.AccountDAO;
-import by.ibank.dao.AccountDAOImpl;
-import by.ibank.dao.UserDAO;
-import by.ibank.dao.UserDAOImpl;
+import by.ibank.dao.*;
 
 import java.time.LocalDate;
 
@@ -32,9 +29,12 @@ public class Test {
         AccountDAO accountDAO = new AccountDAOImpl();
       //  Account ac1 =new Account("3wjr4h87ff",200);//3wjr4h2j23428
        // accountDAO.save(user,ac1);
-        Account fromAccount = accountDAO.findAccount("3wjr4h2j23428");
-        Account toAccount = accountDAO.findAccount("3wjr4h87ff");
-        accountDAO.transferMoney(fromAccount,50,toAccount);
+//        Account fromAccount = accountDAO.findAccount("3wjr4h2j23428");
+//        Account toAccount = accountDAO.findAccount("3wjr4h87ff");
+//        accountDAO.transferMoney(fromAccount,50,toAccount);
+
+        CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
+        System.out.println(creditCardDAO.findAllUserCards("Alex"));
     }
 
 
