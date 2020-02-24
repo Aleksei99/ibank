@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class History extends AbstractEntity {
     private int spentMoney;
     private LocalDate datePurchase;
+    private CreditCard creditCard;
 
     public History(int spentMoney, LocalDate datePurchase) {
         this.spentMoney = spentMoney;
@@ -18,6 +19,14 @@ public class History extends AbstractEntity {
     }
 
     public History() {
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 
     public int getSpentMoney() {

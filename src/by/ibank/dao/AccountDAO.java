@@ -12,4 +12,5 @@ public interface AccountDAO {
     List<Account> findAllAccounts() throws ClassNotFoundException;
     Account findAccount(String account_number) throws ClassNotFoundException;
     void transferMoney(Account fromAccount,int money, Account toAccount) throws  ClassNotFoundException;
+    
 }

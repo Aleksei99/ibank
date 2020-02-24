@@ -33,8 +33,10 @@ public class Test {
 //        Account toAccount = accountDAO.findAccount("3wjr4h87ff");
 //        accountDAO.transferMoney(fromAccount,50,toAccount);
 
+        //CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
+        //System.out.println(creditCardDAO.findAllUserCards("Alex"));
         CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
-        System.out.println(creditCardDAO.findAllUserCards("Alex"));
+        creditCardDAO.transferMoney(552,100,554);
     }
 
 
