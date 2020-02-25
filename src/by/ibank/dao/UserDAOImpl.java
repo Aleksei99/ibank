@@ -32,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
                     user.setSex(resultSet.getString("sex"));
                     user.setSecondName(resultSet.getString("second_name"));
                     user.setPassportNumber(resultSet.getString("passport_number"));
-                    //user.setUserRole(UserRole(resultSet.getInt("role")));------?????????????????????????
+                    user.setUserRole(UserRole.valueOf(resultSet.getString("role")));
                     user.setLogin(resultSet.getString("login"));
                     user.setPassword(resultSet.getString("password"));
                     user.setEmail(resultSet.getString("email"));
@@ -64,7 +64,7 @@ public class UserDAOImpl implements UserDAO {
                     user.setSex(resultSet.getString("sex"));
                     user.setSecondName(resultSet.getString("second_name"));
                     user.setPassportNumber(resultSet.getString("passport_number"));
-                   // user.setUserRole(new UserRole(resultSet.getInt("role")));//------?????????????????????????
+                    user.setUserRole(UserRole.valueOf(resultSet.getString("role")));
                     user.setLogin(resultSet.getString("login"));
                     user.setPassword(resultSet.getString("password"));
                     user.setEmail(resultSet.getString("email"));
@@ -94,7 +94,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(9,user.getEmail());
             preparedStatement.setString(10,user.getPassword());
             preparedStatement.setString(11,user.getLogin());
-            preparedStatement.setInt(12,user.getUserRole().getValue());
+            preparedStatement.setString(12,user.getUserRole().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
