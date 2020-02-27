@@ -8,13 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
+    private static final String FIND_ALL = "select * from users";
+    private static final String FIND_BY_ID = "select * from users where id = ?";
+    private static final String SAVE = "INSERT into users (name,second_name, surname, birthday, address," +
+            " phone_number, sex,  passport_number," +
+            " email, password, login,role) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String DELETE_BY_ID = "delete from users where id = ?";
 
     @Override
     public List<User> findAllUsers() {
         List<User> users = new ArrayList<>();
-        try (Connection connection = Connect.getConnection();
+        try (Connection connection = ConnectionManager.getConnection();
              Statement statement = connection.createStatement()) {
-            try(ResultSet resultSet = statement.executeQuery("select * from users")) {
+            try (ResultSet resultSet = statement.executeQuery(FIND_ALL)) {
                 while (resultSet.next()) {
                     User user = new User();
                     user.setId(resultSet.getInt("id"));
@@ -42,12 +48,12 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User findUser(int id) {
         User user = new User();
-        try(Connection connection = Connect.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where id = ?")){
-            preparedStatement.setInt(1,id);
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
+            preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            try(ResultSet resultSet = preparedStatement.getResultSet()) {
-                while (resultSet.next()){
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
                     user.setId(resultSet.getInt("id"));
                     user.setName(resultSet.getString("name"));
                     user.setSurname(resultSet.getString("surname"));
@@ -63,7 +69,7 @@ public class UserDAOImpl implements UserDAO {
                     user.setEmail(resultSet.getString("email"));
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
@@ -71,22 +77,20 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void save(User user) {
-        try(Connection connection = Connect.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into users (name,second_name, surname, birthday, address," +
-                    " phone_number, sex,  passport_number," +
-                    " email, password, login,role) values (?,?,?,?,?,?,?,?,?,?,?,?)")){
-            preparedStatement.setString(1,user.getName());
-            preparedStatement.setString(2,user.getSecondName());
-            preparedStatement.setString(3,user.getSurname());
-            preparedStatement.setDate(4,user.getBirthday());
-            preparedStatement.setString(5,user.getAddress());
-            preparedStatement.setString(6,user.getTelephone());
-            preparedStatement.setString(7,user.getSex());
-            preparedStatement.setString(8,user.getPassportNumber());
-            preparedStatement.setString(9,user.getEmail());
-            preparedStatement.setString(10,user.getPassword());
-            preparedStatement.setString(11,user.getLogin());
-            preparedStatement.setString(12,user.getUserRole().toString());
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SAVE)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSecondName());
+            preparedStatement.setString(3, user.getSurname());
+            preparedStatement.setDate(4, user.getBirthday());
+            preparedStatement.setString(5, user.getAddress());
+            preparedStatement.setString(6, user.getTelephone());
+            preparedStatement.setString(7, user.getSex());
+            preparedStatement.setString(8, user.getPassportNumber());
+            preparedStatement.setString(9, user.getEmail());
+            preparedStatement.setString(10, user.getPassword());
+            preparedStatement.setString(11, user.getLogin());
+            preparedStatement.setString(12, user.getUserRole().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,9 +99,9 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void remove(int id) {
-        try(Connection connection = Connect.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("delete from users where id = ?")){
-            preparedStatement.setInt(1,id);
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID)) {
+            preparedStatement.setInt(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,7 +109,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(User user) throws ClassNotFoundException {
+    public void update(User user) {
 
     }
 }

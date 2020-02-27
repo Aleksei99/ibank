@@ -5,9 +5,13 @@ import by.ibank.entity.User;
 import java.util.List;
 
 public interface UserDAO {
-    List<User> findAllUsers() throws ClassNotFoundException;
-    User findUser(int id) throws ClassNotFoundException;
-    void save(User user) throws ClassNotFoundException;
-    void remove(int id) throws ClassNotFoundException;
-    void update(User user) throws ClassNotFoundException;
+    List<User> findAllUsers();
+
+    User findUser(int id);
+
+    void save(User user);
+
+    void remove(int id);
+
+    void update(User user);
 }
