@@ -21,7 +21,7 @@ public class Test {
     public static void main(String[] args) throws ClassNotFoundException {
         checkFunctional("ADMIN");
         checkFunctional("MODERATOR");
-        System.out.println(UserRole.ADMIN.getValue());
+        System.out.println(UserRole.ADMIN);
         UserDAO userDAO = new UserDAOImpl();
 //        User user2 = new User("Aloxa","Alexandrovich","kekw",1992,11,2,"home","+375298582223","mail","mc2845492","al@gamil.com","dsgff584","alox",UserRole.USER);
 //        userDAO.save(user2);
@@ -36,7 +36,7 @@ public class Test {
         //CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
         //System.out.println(creditCardDAO.findAllUserCards("Alex"));
         CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
-        creditCardDAO.transferMoney(552,100,554);
+        creditCardDAO.transferMoney(554,50,552);
     }
 
 

@@ -8,15 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAOImpl implements AccountDAO {
-    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/my_bank2?serverTimezone=UTC";
-
-    private static final String USER = "root";
-    private static final String PASSWORD = "MySQLicui4cuL";
     @Override
-    public void save(User user, Account account) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+    public void save(User user, Account account) {
+        try (Connection connection = Connect.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("insert into accounts (account_number," +
                      "amount,user_id) values (?,?,?)")) {
             preparedStatement.setString(1,account.getAccountNumber());
@@ -30,10 +24,9 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void delete(String account_number) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
-        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM  accounts WHERE (account_number = ?)")) {
+    public void delete(String account_number) {
+        try(Connection connection = Connect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM  accounts WHERE (account_number = ?)")) {
             preparedStatement.setString(1,account_number);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -42,9 +35,8 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void addMoney(Account account, int money) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+    public void addMoney(Account account, int money) {
+        try(Connection connection = Connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE  accounts SET amount = ? WHERE account_number = ?")){
             preparedStatement.setInt(1,account.getAmount()+money);
             preparedStatement.setString(2,account.getAccountNumber());
@@ -55,10 +47,9 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public List<Account> findAllAccounts() throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
+    public List<Account> findAllAccounts() {
         List<Account> accounts = new ArrayList<>();
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+        try(Connection connection = Connect.getConnection();
             Statement statement = connection.createStatement()){
             try(ResultSet resultSet = statement.executeQuery("select * from accounts")) {
                 while (resultSet.next()){
@@ -75,10 +66,9 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public Account findAccount(String account_number) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
+    public Account findAccount(String account_number){
         Account account = new Account();
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+        try(Connection connection = Connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("select * from accounts where account_number = ?")){
             preparedStatement.setString(1,account_number);
             preparedStatement.execute();
@@ -95,9 +85,8 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void transferMoney(Account fromAccount, int money, Account toAccount) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+    public void transferMoney(Account fromAccount, int money, Account toAccount) {
+        try (Connection connection = Connect.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update accounts set amount = ?" +
                      " where account_number = ?");
              PreparedStatement preparedStatement1 = connection.prepareStatement("update accounts set amount = ?" +

@@ -2,7 +2,6 @@ package by.ibank.dao;
 
 import by.ibank.entity.Account;
 import by.ibank.entity.CreditCard;
-import by.ibank.entity.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,19 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreditCardDAOImpl implements CreditCardDAO {
-
-    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/my_bank2?serverTimezone=UTC";
-
-    private static final String USER = "root";
-    private static final String PASSWORD = "MySQLicui4cuL";
-
     @Override
-    public List<CreditCard> findAllUserCards(String user) throws ClassNotFoundException {
+    public List<CreditCard> findAllUserCards(String user) {
         List<CreditCard> cards = new ArrayList<>();
-        Class.forName(JDBC_DRIVER);
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
-        PreparedStatement preparedStatement = connection.prepareStatement("with su_table as( select card_number,exp_month,exp_year,account_id,user_id from credit_cards c join accounts a on c.account_id=a.id)\n" +
+        try(Connection connection = Connect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("with su_table as( select card_number,exp_month,exp_year,account_id,user_id from credit_cards c join accounts a on c.account_id=a.id)\n" +
                 "select  card_number,exp_month,exp_year,account_id,user_id,name from su_table  s join users u on s.user_id=u.id where name=?")) {
             preparedStatement.setString(1,user);
             preparedStatement.execute();
@@ -50,8 +41,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
 
     @Override
     public void transferMoney(int fromCreditCard, int money, int toCreditCard) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+        try (Connection connection = Connect.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select amount from accounts a join credit_cards c on c.account_id=a.id where card_number = ?");
              PreparedStatement preparedStatement1 = connection.prepareStatement("select amount from accounts a join credit_cards c on c.account_id=a.id where card_number = ?");
              PreparedStatement preparedStatement2 = connection.prepareStatement("update accounts a join credit_cards c on c.account_id=a.id set amount = ? where card_number = ?");
@@ -96,9 +86,8 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public void addCard(Account account, CreditCard creditCard) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+    public void addCard(Account account, CreditCard creditCard) {
+        try (Connection connection = Connect.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("insert into credit_cards (card_number," +
                      "exp_month,exp_year,account_id) values (?,?,?,?)")) {
             preparedStatement.setInt(1,creditCard.getCardNumber());
@@ -113,9 +102,8 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public void deleteCard(String cardNumber) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+    public void deleteCard(String cardNumber) {
+        try(Connection connection = Connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM  credit_cards WHERE (card_number = ?)")) {
             preparedStatement.setString(1,cardNumber);
             preparedStatement.executeUpdate();

@@ -8,17 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
-    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/my_bank2?serverTimezone=UTC";
-
-    private static final String USER = "root";
-    private static final String PASSWORD = "MySQLicui4cuL";
 
     @Override
-    public List<User> findAllUsers() throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
+    public List<User> findAllUsers() {
         List<User> users = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+        try (Connection connection = Connect.getConnection();
              Statement statement = connection.createStatement()) {
             try(ResultSet resultSet = statement.executeQuery("select * from users")) {
                 while (resultSet.next()) {
@@ -46,10 +40,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findUser(int id) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
+    public User findUser(int id) {
         User user = new User();
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+        try(Connection connection = Connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("select * from users where id = ?")){
             preparedStatement.setInt(1,id);
             preparedStatement.execute();
@@ -77,9 +70,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void save(User user) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+    public void save(User user) {
+        try(Connection connection = Connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT into users (name,second_name, surname, birthday, address," +
                     " phone_number, sex,  passport_number," +
                     " email, password, login,role) values (?,?,?,?,?,?,?,?,?,?,?,?)")){
@@ -102,9 +94,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void remove(int id) throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        try(Connection connection = DriverManager.getConnection(DATABASE_URL,USER,PASSWORD);
+    public void remove(int id) {
+        try(Connection connection = Connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("delete from users where id = ?")){
             preparedStatement.setInt(1,id);
             preparedStatement.execute();
